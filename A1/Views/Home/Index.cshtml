@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Movie Theaters</h1>
+    <p class="lead"> Movie Theaters in Barrie, movie currently running in the screens and the seating capacity </p>
+    
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Theaters","Index","Theaters")</h2>
+        <p>
+            The Theaters information in Barrie
+        </p>
+        
+    </div>
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Screens", "Index", "Screens")</h2>
+        <p>Each theater may have many screens, you can know about the various screens and current movies running in them. </p>
+        
+    </div>
+    <!--<div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>-->
+</div>

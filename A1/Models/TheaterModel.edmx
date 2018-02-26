@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MoviesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Screens">
+          <Key>
+            <PropertyRef Name="Screen_id" />
+          </Key>
+          <Property Name="Theater_id" Type="varchar" MaxLength="6" />
+          <Property Name="Screen_id" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="No_of_Seats" Type="numeric" Precision="3" Scale="0" />
+          <Property Name="Current_Movie" Type="varchar" MaxLength="100" />
+          <Property Name="ThreeD" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="Theaters">
+          <Key>
+            <PropertyRef Name="Theater_id" />
+          </Key>
+          <Property Name="Theater_id" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="TheaterName" Type="varchar" MaxLength="30" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__Screens__Theater__286302EC">
+          <End Role="Theaters" Type="Self.Theaters" Multiplicity="0..1" />
+          <End Role="Screens" Type="Self.Screens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Theaters">
+              <PropertyRef Name="Theater_id" />
+            </Principal>
+            <Dependent Role="Screens">
+              <PropertyRef Name="Theater_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MoviesModelStoreContainer">
+          <EntitySet Name="Screens" EntityType="Self.Screens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Theaters" EntityType="Self.Theaters" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Screens__Theater__286302EC" Association="Self.FK__Screens__Theater__286302EC">
+            <End Role="Theaters" EntitySet="Theaters" />
+            <End Role="Screens" EntitySet="Screens" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MoviesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Screen">
+          <Key>
+            <PropertyRef Name="Screen_id" />
+          </Key>
+          <Property Name="Theater_id" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Screen_id" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="No_of_Seats" Type="Decimal" Precision="3" Scale="0" />
+          <Property Name="Current_Movie" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ThreeD" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Theater" Relationship="Self.FK__Screens__Theater__286302EC" FromRole="Screens" ToRole="Theaters" />
+        </EntityType>
+        <EntityType Name="Theater">
+          <Key>
+            <PropertyRef Name="Theater_id" />
+          </Key>
+          <Property Name="Theater_id" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TheaterName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Screens" Relationship="Self.FK__Screens__Theater__286302EC" FromRole="Theaters" ToRole="Screens" />
+        </EntityType>
+        <Association Name="FK__Screens__Theater__286302EC">
+          <End Role="Theaters" Type="Self.Theater" Multiplicity="0..1" />
+          <End Role="Screens" Type="Self.Screen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Theaters">
+              <PropertyRef Name="Theater_id" />
+            </Principal>
+            <Dependent Role="Screens">
+              <PropertyRef Name="Theater_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MoviesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Screens" EntityType="Self.Screen" />
+          <EntitySet Name="Theaters" EntityType="Self.Theater" />
+          <AssociationSet Name="FK__Screens__Theater__286302EC" Association="Self.FK__Screens__Theater__286302EC">
+            <End Role="Theaters" EntitySet="Theaters" />
+            <End Role="Screens" EntitySet="Screens" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MoviesModelStoreContainer" CdmEntityContainer="MoviesEntities">
+          <EntitySetMapping Name="Screens">
+            <EntityTypeMapping TypeName="MoviesModel.Screen">
+              <MappingFragment StoreEntitySet="Screens">
+                <ScalarProperty Name="Theater_id" ColumnName="Theater_id" />
+                <ScalarProperty Name="Screen_id" ColumnName="Screen_id" />
+                <ScalarProperty Name="No_of_Seats" ColumnName="No_of_Seats" />
+                <ScalarProperty Name="Current_Movie" ColumnName="Current_Movie" />
+                <ScalarProperty Name="ThreeD" ColumnName="ThreeD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Theaters">
+            <EntityTypeMapping TypeName="MoviesModel.Theater">
+              <MappingFragment StoreEntitySet="Theaters">
+                <ScalarProperty Name="Theater_id" ColumnName="Theater_id" />
+                <ScalarProperty Name="TheaterName" ColumnName="TheaterName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

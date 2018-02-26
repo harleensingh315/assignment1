@@ -1,0 +1,51 @@
+﻿@model IEnumerable<A1.Models.Screen>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.No_of_Seats)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Current_Movie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThreeD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Theater.TheaterName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.No_of_Seats)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Current_Movie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThreeD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Theater.TheaterName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Screen_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Screen_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Screen_id })
+        </td>
+    </tr>
+}
+
+</table>

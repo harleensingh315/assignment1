@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MoviesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Screens">
+    <Key>
+      <PropertyRef Name="Screen_id" />
+    </Key>
+    <Property Name="Theater_id" Type="varchar" MaxLength="6" />
+    <Property Name="Screen_id" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="No_of_Seats" Type="numeric" Precision="3" Scale="0" />
+    <Property Name="Current_Movie" Type="varchar" MaxLength="100" />
+    <Property Name="ThreeD" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="Theaters">
+    <Key>
+      <PropertyRef Name="Theater_id" />
+    </Key>
+    <Property Name="Theater_id" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="TheaterName" Type="varchar" MaxLength="30" />
+    <Property Name="Address" Type="varchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK__Screens__Theater__286302EC">
+    <End Role="Theaters" Type="Self.Theaters" Multiplicity="0..1" />
+    <End Role="Screens" Type="Self.Screens" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Theaters">
+        <PropertyRef Name="Theater_id" />
+      </Principal>
+      <Dependent Role="Screens">
+        <PropertyRef Name="Theater_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MoviesModelStoreContainer">
+    <EntitySet Name="Screens" EntityType="Self.Screens" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Theaters" EntityType="Self.Theaters" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Screens__Theater__286302EC" Association="Self.FK__Screens__Theater__286302EC">
+      <End Role="Theaters" EntitySet="Theaters" />
+      <End Role="Screens" EntitySet="Screens" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

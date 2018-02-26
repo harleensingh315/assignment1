@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MoviesModelStoreContainer" CdmEntityContainer="MoviesEntities">
+    <EntitySetMapping Name="Screens">
+      <EntityTypeMapping TypeName="MoviesModel.Screen">
+        <MappingFragment StoreEntitySet="Screens">
+          <ScalarProperty Name="Theater_id" ColumnName="Theater_id" />
+          <ScalarProperty Name="Screen_id" ColumnName="Screen_id" />
+          <ScalarProperty Name="No_of_Seats" ColumnName="No_of_Seats" />
+          <ScalarProperty Name="Current_Movie" ColumnName="Current_Movie" />
+          <ScalarProperty Name="ThreeD" ColumnName="ThreeD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Theaters">
+      <EntityTypeMapping TypeName="MoviesModel.Theater">
+        <MappingFragment StoreEntitySet="Theaters">
+          <ScalarProperty Name="Theater_id" ColumnName="Theater_id" />
+          <ScalarProperty Name="TheaterName" ColumnName="TheaterName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
